@@ -1,14 +1,22 @@
-import "./App.css";
-import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
+import TodoInput from "./components/TodoInput";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  h3 {
+    text-align: center;
+  }
+`;
 
 function App() {
   return (
-    <div className="container">
-      <h5> hello from main section</h5>
-      <TodoInput />
-      <TodoList />
-    </div>
+    <Wrapper>
+      <div className="container">
+        <h3>ToDo</h3>
+        <TodoInput />
+        <TodoList />
+      </div>
+    </Wrapper>
   );
 }
 
