@@ -190,3 +190,17 @@ ul {
   color: var(--white);
   background: var(--primary-color);
 }
+
+.delete-btn,
+.edit-link {
+  background: transparent;
+  font-size: 0.75rem;
+  border: transparent;
+  cursor: pointer;
+}
+.edit-link {
+  color: var(--green-dark);
+}
+.delete-btn {
+  color: var(--red-dark);
+}
