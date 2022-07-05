@@ -59,6 +59,11 @@ function App() {
     setList([]);
   };
 
+  const removeTodo = (id) => {
+    // display alert
+    setList(list.filter((item) => item.id !== id));
+  };
+
   return (
     <Wrapper className="container">
       <h3>ToDo</h3>
@@ -76,7 +81,7 @@ function App() {
         </div>
       </form>
       <div>
-        <TodoList items={list} />
+        <TodoList items={list} removeTodo={removeTodo} />
         <button
           type="button"
           className="btn btn-clear btn-hipster"

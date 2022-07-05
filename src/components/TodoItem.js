@@ -35,7 +35,7 @@ const Wrapper = styled.div`
 `;
 
 const TodoItem = (props) => {
-  const { title } = props;
+  const { id, title, removeTodo } = props;
   return (
     <>
       <Wrapper>
@@ -45,7 +45,11 @@ const TodoItem = (props) => {
             <button type="button" className="edit-btn">
               {<FaRegEdit />}
             </button>
-            <button type="button" className="delete-btn">
+            <button
+              type="button"
+              className="delete-btn"
+              onClick={() => removeTodo(id)}
+            >
               {<FaTrash />}
             </button>
           </div>
