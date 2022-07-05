@@ -192,13 +192,13 @@ ul {
 }
 
 .delete-btn,
-.edit-link {
+.edit-btn {
   background: transparent;
   font-size: 0.75rem;
   border: transparent;
   cursor: pointer;
 }
-.edit-link {
+.edit-btn {
   color: var(--green-dark);
 }
 .delete-btn {
