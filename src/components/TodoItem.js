@@ -35,14 +35,18 @@ const Wrapper = styled.div`
 `;
 
 const TodoItem = (props) => {
-  const { id, title, removeTodo } = props;
+  const { id, title, removeTodo, editTodo } = props;
   return (
     <>
       <Wrapper>
         <li>
           <p>{title}</p>
           <div>
-            <button type="button" className="edit-btn">
+            <button
+              type="button"
+              className="edit-btn"
+              onClick={() => editTodo(id)}
+            >
               {<FaRegEdit />}
             </button>
             <button

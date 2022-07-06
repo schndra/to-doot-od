@@ -35,6 +35,7 @@ function App() {
   const [name, setName] = useState("");
   const [list, setList] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
+  const [editID, setEditID] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -42,6 +43,17 @@ function App() {
       // display alert
     } else if (name && isEditing) {
       // deal with editing
+      setList(
+        list.map((item) => {
+          if (item.id === editID) {
+            return { ...item, title: name };
+          }
+          return item;
+        })
+      );
+      setName("");
+      setEditID(null);
+      setIsEditing(false);
     } else {
       const id = uuidv4();
       const newList = { id, title: name };
@@ -64,6 +76,15 @@ function App() {
     setList(list.filter((item) => item.id !== id));
   };
 
+  const editTodo = (id) => {
+    // display alert
+    const relavantItem = list.find((item) => item.id === id);
+
+    setIsEditing(true);
+    setEditID(id);
+    setName(relavantItem.title);
+  };
+
   return (
     <Wrapper className="container">
       <h3>ToDo</h3>
@@ -75,21 +96,25 @@ function App() {
             value={name}
             onChange={handleChange}
             className="todo"
-            placeholder="add todo"
+            placeholder={`${isEditing === false ? "add toDo" : "edit ToDo"}`}
           />
-          <button className="btn">add toDo</button>
+          <button className="btn">
+            {isEditing === false ? "add toDo" : "edit ToDo"}
+          </button>
         </div>
       </form>
-      <div>
-        <TodoList items={list} removeTodo={removeTodo} />
-        <button
-          type="button"
-          className="btn btn-clear btn-hipster"
-          onClick={clearList}
-        >
-          clear list
-        </button>
-      </div>
+      {list.length > 0 && (
+        <div>
+          <TodoList items={list} removeTodo={removeTodo} editTodo={editTodo} />
+          <button
+            type="button"
+            className="btn btn-clear btn-hipster"
+            onClick={clearList}
+          >
+            clear list
+          </button>
+        </div>
+      )}
     </Wrapper>
   );
 }
