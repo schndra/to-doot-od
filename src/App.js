@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import TodoList from "./components/TodoList";
+import axios from "axios";
 
 const Wrapper = styled.section`
   h3 {
@@ -37,6 +38,27 @@ function App() {
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(null);
 
+  useEffect(() => {
+    getAllTodo();
+  }, []);
+
+  const addTodo = async (newList) => {
+    try {
+      await axios.post("http://localhost:5000/api/v1/todo", newList);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getAllTodo = async () => {
+    try {
+      const newList = await axios.get("http://localhost:5000/api/v1/todo");
+      setList(newList.data.todo);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name) {
@@ -59,6 +81,7 @@ function App() {
       const newList = { id, title: name };
       setList([...list, newList]);
       setName("");
+      addTodo(newList);
     }
   };
 

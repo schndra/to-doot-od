@@ -9,7 +9,7 @@ const TodoList = (props) => {
       {items.map((item) => {
         return (
           <TodoItem
-            key={item.id}
+            key={item._id}
             {...item}
             removeTodo={removeTodo}
             editTodo={editTodo}
